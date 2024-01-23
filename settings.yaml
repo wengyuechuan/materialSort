@@ -1,0 +1,17 @@
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  db: materials_sort
+  user: root
+  password: root
+  log_level: dev
+logger:
+  level: Debug
+  prefix: "[materials-sort]"   # 前缀
+  director: log     # 存放的目录
+  show_line: true
+  log_in_console: true
+system:
+  host: "0.0.0.0"
+  port: 8080
+  env: release
