@@ -5,20 +5,20 @@ import (
 	"materialsSort/models/res"
 )
 
-type User struct {
+type Users struct {
 	UserId   int    `gorm:"primary_key;AUTO_INCREMENT" json:"user_id"`
 	UserName string `gorm:"type:varchar(20);not null" json:"user_name"`
 	Password string `gorm:"type:varchar(20);not null" json:"password"`
 	Email    string `gorm:"type:varchar(20);not null" json:"email"`
 }
 
-func (User) TableName() string {
-	return "user"
+func (Users) TableName() string {
+	return "users"
 }
 
 // AddUser 添加用户
 func AddUser(userName string, password string, email string) (int, error) {
-	user := User{UserName: userName, Password: password, Email: email}
+	user := Users{UserName: userName, Password: password, Email: email}
 	if err := global.DB.Create(&user).Error; err != nil {
 		return 0, err
 	}
@@ -27,7 +27,7 @@ func AddUser(userName string, password string, email string) (int, error) {
 
 // GetUserById 根据用户id获取用户
 func GetUserById(userId int) (*res.User, error) {
-	user := User{}
+	user := Users{}
 	if err := global.DB.Where("user_id = ?", userId).First(&user).Error; err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func GetUserById(userId int) (*res.User, error) {
 
 // GetUserByName 根据用户名获取用户
 func GetUserByName(userName string) (*res.User, error) {
-	user := User{}
+	user := Users{}
 	if err := global.DB.Where("user_name = ?", userName).First(&user).Error; err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func GetUserByName(userName string) (*res.User, error) {
 
 // UpdateUser 更新用户
 func UpdateUser(userId int, userName string, password string, email string) error {
-	user := User{UserId: userId, UserName: userName, Password: password, Email: email}
+	user := Users{UserId: userId, UserName: userName, Password: password, Email: email}
 	if err := global.DB.Save(&user).Error; err != nil {
 		return err
 	}
@@ -56,7 +56,7 @@ func UpdateUser(userId int, userName string, password string, email string) erro
 
 // DeleteUser 删除用户
 func DeleteUser(userId int) error {
-	user := User{}
+	user := Users{}
 	if err := global.DB.Where("user_id = ?", userId).Delete(&user).Error; err != nil {
 		return err
 	}
@@ -67,7 +67,7 @@ func DeleteUser(userId int) error {
 func GetAllUsers() (int64, []*res.User, error) {
 	var count int64
 	var users []*res.User
-	if err := global.DB.Model(&User{}).Count(&count).Error; err != nil {
+	if err := global.DB.Model(&Users{}).Count(&count).Error; err != nil {
 		return 0, nil, err
 	}
 	if err := global.DB.Find(&users).Error; err != nil {
@@ -80,7 +80,7 @@ func GetAllUsers() (int64, []*res.User, error) {
 func GetAllUsersWithPage(page int, pageSize int) (int64, []*res.User, error) {
 	var count int64
 	var users []*res.User
-	if err := global.DB.Model(&User{}).Count(&count).Error; err != nil {
+	if err := global.DB.Model(&Users{}).Count(&count).Error; err != nil {
 		return 0, nil, err
 	}
 	if err := global.DB.Offset((page - 1) * pageSize).Limit(pageSize).Find(&users).Error; err != nil {
@@ -88,5 +88,3 @@ func GetAllUsersWithPage(page int, pageSize int) (int64, []*res.User, error) {
 	}
 	return count, users, nil
 }
-
-//

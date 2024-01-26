@@ -81,7 +81,8 @@ go get -u github.com/go-ego/gse
 go get -u github.com/sirupsen/logrus
 ```
 ## 参考文档
-[gse](https://gitee.com/veni0/gse)
+- [gse](https://gitee.com/veni0/gse)
+- [5axxw](https://www.5axxw.com/wiki/content/1isfv8)
 ## 写在后面
 我经常性刷到一些教学视频或者是有意义的视频或者资料会发给我自己的微信里面，但是一段时间之后，我可能要用的时候，记得我发给自己过，但是找不到在那里，所以我就想到了这个，之后只需要将资料通过接口提交给我的后端，然后就可以整理并且分类，之后我就可以通过分类或者搜索来找到我想要的资料了。
 ## 开发进度
